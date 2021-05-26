@@ -1,7 +1,9 @@
 # Nextail Platform Challenge 
+
 In this repository I present the development to resolve the Nextail Platform Challenge. 
 
 Below you can read the challenge statement:
+
 ## So we are moving a lot of files!
 
 Let's say we have 1.000 images in a S3 bucket.
@@ -34,4 +36,22 @@ For example: http://s3.amazonaws.com/new_bucket/image123.jpg, http://s3.amazonaw
 - To keep this free of charge, you may use a local S3 emulation tool or AWS free tier. 
 
 ## The Solution
-My approach is based on the AWS CLI and Bash Scripting; keeping it simple. I have used the AWS CLI version 2.
+
+My approach is based on the AWS CLI and Bash Scripting; keep it simple.
+
+### Prerequisites
+
+- I have used the AWS CLI version 2. To install it, just follow the official documentation provided by Amazon: 
+https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html#install-bundle-other-os
+- To configure the AWS CLI to use S3 correctly, just follow that official tutorial provided by Amazon:
+https://aws.amazon.com/es/getting-started/hands-on/backup-to-s3-cli/
+
+### How to use the tool
+
+Assuming a environment correctly configured, to use the proposed solution run the next command:
+
+`./platform_test.sh <origin_s3_bucket> <destiny_s3_bucket>`
+
+__Example:__
+
+`./platform_test.sh nextail-challenge-first-bucket nextail-challenge-second-bucket`
