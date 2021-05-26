@@ -55,3 +55,15 @@ Assuming a environment correctly configured, to use the proposed solution run th
 __Example:__
 
 `./platform_test.sh nextail-challenge-first-bucket nextail-challenge-second-bucket`
+
+## Why this solution
+I decided to solve the challenge like this, for simplicity and compatibility: 
+
+- The solution does not require complex environment settings to function properly. The only requirement is the AWS CLI, which is the vendor's official tool, cross-platform, easy to install, and updated frequently. On the other hand, bash scripts work fine without prior configuration on most GNU / Linux distributions.
+- With the AWS CLI, operations for moving files between buckets are native and run directly on the Amazon infrastructure.
+- In a first version, I used the synchronization option of the aws s3 command. This ensures that you will have an exact copy of the origin at the destination. After this, you need to delete the source files.
+Later, I decided to use the mv option because it is faster due to the implicity of removing the source files in a single command.
+- To ensure that the operation resumes at the same point, I use the mv option combined with checking the error code after the operation. If for some reason the file move is canceled, the error checking forces you to loop and execute the operation again. Because the mv operation deletes any files copied to the destination, it will only copy the rest of the files next time.
+
+## Possible improvement
+This solution is developed on the condition that the repository contains only jpg files; a very simple case. If the case was more complex, we could be more precise by using the `--exclude "*" --include "* .jpg"` option of the aws s3 command.
